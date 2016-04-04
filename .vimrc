@@ -8,7 +8,7 @@ call plug#begin('~/.vim/bundle')
 "Plugin list
 Plug 'Valloric/YouCompleteMe'
 Plug 'bling/vim-airline'
-Plug 'plasticboy/vim-markdown'
+"Plug 'plasticboy/vim-markdown'
 "Plug 'lervag/vim-latex'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -91,7 +91,8 @@ set ruler
 "For solarized plugin (color scheme)
 set background=dark   "必须保证此顺序
 colorscheme solarized
-
+"For no go into select mode when drag the mouse
+set mouse-=a
 
 "End Basic Configurations" 
 """"""""""""""""""""""""""""""""""""""""
@@ -105,9 +106,11 @@ endif
 map <F6> :make<CR>
 
 "Auto load tags
-if exists("tags")
-    set tags=./tags
-endif
+"if exists("tags")
+":insert
+"dsf
+"    set tags=./tags
+"endif
 
 "Auto match brackets
 function! AutoPair(open, close)
@@ -144,6 +147,43 @@ inoremap ] <c-r>=ClosePair(']')<CR>
 inoremap " <c-r>=SamePair('"')<CR>
 inoremap ' <c-r>=SamePair("'")<CR>
 inoremap ` <c-r>=SamePair('`')<CR>
+
+"Auto file headers
+"just vim build-in command, like global(g), replace(s), etc"
+"for C/CXX files
+autocmd bufnewfile *.{c,cpp,h,hpp} so ~/.vim/headers/c_cpp_headers.tmpl
+autocmd bufnewfile *.{c,cpp,h,hpp} exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma")
+autocmd bufnewfile *.{c,cpp,h,hpp} exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.{c,cpp,h,hpp} exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp} execute "normal ma"
+autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp} exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.{c,cpp,h,hpp} execute "normal `a"
+"for Python files
+autocmd bufnewfile *.py so ~/.vim/headers/py_headers.tmpl
+autocmd bufnewfile *.py exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma")
+autocmd bufnewfile *.py exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.py exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.py execute "normal ma"
+autocmd Bufwritepre,filewritepre *.py exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.py execute "normal `a"
+"for Ruby files
+autocmd bufnewfile *.rb so ~/.vim/headers/rb_headers.tmpl
+autocmd bufnewfile *.rb exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma")
+autocmd bufnewfile *.rb exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.rb exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.rb execute "normal ma"
+autocmd Bufwritepre,filewritepre *.rb exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.rb execute "normal `a"
+"for Shell scripts
+autocmd bufnewfile *.sh so ~/.vim/headers/sh_headers.tmpl
+autocmd bufnewfile *.sh exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma")
+autocmd bufnewfile *.sh exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.sh exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.sh execute "normal ma"
+autocmd Bufwritepre,filewritepre *.sh exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.sh execute "normal `a"
+"for makefile
+autocmd bufnewfile makefile so ~/.vim/headers/makefile_headers.tmpl
 
 "End User's Configurations"
 """""""""""""""""""""""""""""""""""""""
