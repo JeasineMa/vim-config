@@ -91,9 +91,8 @@ set ruler
 "For solarized plugin (color scheme)
 set background=dark   "必须保证此顺序
 colorscheme solarized
-"For no go into select mode when drag the mouse
-set mouse-=a
-
+"Share the clipboard with system
+set clipboard=unnamed
 "End Basic Configurations" 
 """"""""""""""""""""""""""""""""""""""""
 
