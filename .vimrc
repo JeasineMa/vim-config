@@ -11,18 +11,19 @@ Plug 'bling/vim-airline'
 "Plug 'plasticboy/vim-markdown'
 "Plug 'lervag/vim-latex'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic' "grammar check
 Plug 'Yggdroot/indentLine'
-Plug 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'  "search
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'ervandew/supertab'
-Plug 'majutsushi/tagbar'
+Plug 'ervandew/supertab' "using tab for completion
+Plug 'majutsushi/tagbar' 
 Plug 'jrosiek/vim-mark'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'  "git branch show support
 "Plug 'powerline/powerline'
 Plug 'rizzatti/dash.vim'
 Plug 'vim-airline/vim-airline-themes'
-
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'szw/vim-tags'
 " " All of your Plugins must be added before the following line
 call plug#end()         
 
@@ -93,6 +94,13 @@ set background=dark   "必须保证此顺序
 colorscheme solarized
 "Share the clipboard with system
 set clipboard=unnamed
+"close the scratch window
+set completeopt-=preview
+"remap the jump shortkey
+map <A-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <C-/> :vsp <CR>:exec("tag ".expand("<cword>")<CR>
+"set MacVim font
+set guifont=Monaco_for_Powerline:h12
 "End Basic Configurations" 
 """"""""""""""""""""""""""""""""""""""""
 
@@ -200,6 +208,7 @@ let Tlist_GainFocus_On_ToggleOpen=1 "打开taglist时获得输入焦点
 map <F3> :NERDTreeMirror<CR>
 map <F3> :NERDTreeToggle<CR>
 set modifiable
+let g:NERDTree_autofocus = 1
 
 "airline
 set laststatus=2   "总是显示状态栏 
@@ -225,13 +234,13 @@ let g:airline#extensions#whitespace#enabled = 0
 " for ycm
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
-nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>dc :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nmap <F4> :YcmDiags<CR>"
+let g:ycm_python_binary_path = '/usr/local/bin/python3'
+nmap <F9> :YcmCompleter GoToDeclaration<CR>
+nmap <F10> :YcmCompleter GoToDefinition<CR>
 
 "for tagbar
 nmap <F4> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
 
 "for rainbow"
 au VimEnter * RainbowParenthesesToggle
