@@ -101,6 +101,8 @@ map <A-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <C-/> :vsp <CR>:exec("tag ".expand("<cword>")<CR>
 "set MacVim font
 set guifont=Monaco_for_Powerline:h12
+"set autocomplete choose key to return
+inoremap <expr> <CR> ((pumvisible())?("\<C-y>"):("\n"))
 "End Basic Configurations" 
 """"""""""""""""""""""""""""""""""""""""
 
