@@ -1,5 +1,6 @@
 "使用vim-plug
-filetype  off   "否则autoload无法加载
+filetype  on   "否则autoload无法加载
+filetype plugin indent on
 syntax on
 
 "filetype plugin indent on
@@ -24,6 +25,8 @@ Plug 'rizzatti/dash.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'szw/vim-tags'
+Plug 'vhda/verilog_systemverilog.vim'  "verilog autocompletion and code naviagation. 
+Plug 'kchmck/vim-coffee-script'  "syntax highlight and indent for coffee-script
 " " All of your Plugins must be added before the following line
 call plug#end()         
 
@@ -49,10 +52,11 @@ set selectmode=mouse,key
 set showmatch
 "No compatitble with vi
 set nocompatible
-"Indent
+"Indent&no tab, just 4 spaces
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set expandtab
 set autoindent
 set cindent
 if &term=="xterm"
@@ -250,3 +254,7 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+"for verilog-vim
+"nnoremap <C-W> :VerilogFollowInstance<CR>
+"nnoremap <C-W> :VerilogFollowPort<CR>
+"nnoremap <C-W> :VerilogGotoInstanceStart<CR>
