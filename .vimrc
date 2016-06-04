@@ -59,6 +59,7 @@ set shiftwidth=4
 set expandtab
 set autoindent
 set cindent
+set smartindent
 if &term=="xterm"
     set t_Co=8
     set t_Sb=^[[4%dm
@@ -107,6 +108,36 @@ map <C-/> :vsp <CR>:exec("tag ".expand("<cword>")<CR>
 set guifont=Monaco_for_Powerline:h12
 "set autocomplete choose key to return
 inoremap <expr> <CR> ((pumvisible())?("\<C-y>"):("\n"))
+"cscope settings
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR> 
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR> 
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR> 
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR> 
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR> 
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR> 
+nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR> 
+
+"nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>    
+"nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>    
+"nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>    
+"nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>    
+"nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>    
+"nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>    
+"nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>  
+"nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>    
+
+nmap <C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>   
+nmap <C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR> 
+nmap <C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+
+"set cursorline
+set cursorline
 "End Basic Configurations" 
 """"""""""""""""""""""""""""""""""""""""
 
@@ -116,7 +147,7 @@ if exists("&autoread")
     set autoread
 endif
 "Press F6 to make
-map <F6> :make<CR>
+map <F8> :make<CR>
 
 "Auto load tags
 "if exists("tags")
