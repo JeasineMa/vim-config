@@ -53,13 +53,7 @@ set showmatch
 "No compatitble with vi
 set nocompatible
 "Indent&no tab, just 4 spaces
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-set autoindent
-set cindent
-set smartindent
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 if &term=="xterm"
     set t_Co=8
     set t_Sb=^[[4%dm
@@ -138,6 +132,10 @@ nmap <C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 
 "set cursorline
 set cursorline
+
+"set paste with key-bindings to avoid indent chaos when pasting codes.
+set pastetoggle=<F2>
+
 "End Basic Configurations" 
 """"""""""""""""""""""""""""""""""""""""
 
@@ -227,7 +225,14 @@ autocmd Bufwritepre,filewritepre *.sh execute "normal ma"
 autocmd Bufwritepre,filewritepre *.sh exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
 autocmd bufwritepost,filewritepost *.sh execute "normal `a"
 "for makefile
-autocmd bufnewfile makefile so ~/.vim/headers/makefile_headers.tmpl
+autocmd bufnewfile makefile 0r ~/.vim/headers/makefile_headers.tmpl
+"for ros_msg
+autocmd bufnewfile *.msg 0r ~/.vim/headers/ros_msg_headers.tmpl
+"for ros_srv
+autocmd bufnewfile *.srv 0r ~/.vim/headers/ros_srv_headers.tmpl
+"for ros_actionlib
+autocmd bufnewfile *.action 0r ~/.vim/headers/ros_action_headers.tmpl
+
 
 "End User's Configurations"
 """""""""""""""""""""""""""""""""""""""
