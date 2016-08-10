@@ -135,7 +135,9 @@ set cursorline
 
 "set paste with key-bindings to avoid indent chaos when pasting codes.
 set pastetoggle=<F2>
-
+"set <F1> as search highlight"
+let hlstate=0
+nnoremap <silent><F1> :if (hlstate == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=1-hlstate<cr>
 "End Basic Configurations" 
 """"""""""""""""""""""""""""""""""""""""
 
