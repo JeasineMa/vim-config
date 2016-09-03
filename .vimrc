@@ -22,11 +22,12 @@ Plug 'jrosiek/vim-mark'
 Plug 'tpope/vim-fugitive'  "git branch show support
 "Plug 'powerline/powerline'
 Plug 'rizzatti/dash.vim'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'vim-airline/vim-airline-themes'
 Plug 'szw/vim-tags'
 Plug 'vhda/verilog_systemverilog.vim'  "verilog autocompletion and code naviagation. 
 Plug 'kchmck/vim-coffee-script'  "syntax highlight and indent for coffee-script
+Plug 'artur-shaik/vim-javacomplete2'  "autocomplete for java
 " " All of your Plugins must be added before the following line
 call plug#end()         
 
@@ -59,7 +60,7 @@ if &term=="xterm"
     set t_Sb=^[[4%dm
     set t_Sf=^[[3%dm
 endif
-"Filetype detect
+"Filetype detect, must place after load the YCM
 filetype on
 "Set default shell
 set shell=fish
@@ -140,7 +141,6 @@ let hlstate=0
 nnoremap <silent><F1> :if (hlstate == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=1-hlstate<cr>
 "End Basic Configurations" 
 """"""""""""""""""""""""""""""""""""""""
-
 "Start User's Configurations"
 ""reload the file when changed
 if exists("&autoread")
@@ -195,10 +195,10 @@ inoremap ` <c-r>=SamePair('`')<CR>
 "Auto file headers
 "just vim build-in command, like global(g), replace(s), etc"
 "for C/CXX files
-autocmd bufnewfile *.{c,cpp,h,hpp} so ~/.vim/headers/c_cpp_headers.tmpl
-autocmd bufnewfile *.{c,cpp,h,hpp} exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma")
-autocmd bufnewfile *.{c,cpp,h,hpp} exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
-autocmd bufnewfile *.{c,cpp,h,hpp} exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd bufnewfile *.{c,cpp,cc} so ~/.vim/headers/c_cpp_headers.tmpl
+autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma")
+autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp} execute "normal ma"
 autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp} exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
 autocmd bufwritepost,filewritepost *.{c,cpp,h,hpp} execute "normal `a"
@@ -226,6 +226,14 @@ autocmd bufnewfile *.sh exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : "
 autocmd Bufwritepre,filewritepre *.sh execute "normal ma"
 autocmd Bufwritepre,filewritepre *.sh exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
 autocmd bufwritepost,filewritepost *.sh execute "normal `a"
+"for java files
+autocmd bufnewfile *.java so ~/.vim/headers/java_headers.tmpl
+autocmd bufnewfile *.java exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma")
+autocmd bufnewfile *.java exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.java exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.sh execute "normal ma"
+autocmd Bufwritepre,filewritepre *.sh exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.sh execute "normal `a"
 "for makefile
 autocmd bufnewfile makefile 0r ~/.vim/headers/makefile_headers.tmpl
 "for ros_msg
@@ -234,6 +242,15 @@ autocmd bufnewfile *.msg 0r ~/.vim/headers/ros_msg_headers.tmpl
 autocmd bufnewfile *.srv 0r ~/.vim/headers/ros_srv_headers.tmpl
 "for ros_actionlib
 autocmd bufnewfile *.action 0r ~/.vim/headers/ros_action_headers.tmpl
+"for generate guard for header file
+function! s:insert_gates()
+    let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
+    execute "normal! i#ifndef " . gatename
+    execute "normal! o#define " . gatename . " "
+    execute "normal! Go#endif /* " . gatename . " */"
+    normal! kk
+endfunction
+autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
 
 
 "End User's Configurations"
@@ -296,3 +313,10 @@ au Syntax * RainbowParenthesesLoadBraces
 "nnoremap <C-W> :VerilogFollowInstance<CR>
 "nnoremap <C-W> :VerilogFollowPort<CR>
 "nnoremap <C-W> :VerilogGotoInstanceStart<CR>
+"
+"for vim-javacomplete2
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+
+
+
