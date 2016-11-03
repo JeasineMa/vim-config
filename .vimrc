@@ -264,6 +264,17 @@ function! s:insert_gates()
 endfunction
 autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
 "for convert tab to 4 spaces and remove unwanted spaces
+function ShowSpacesTab(...)
+  let @/='\v(\s+$)|( +\ze\t)|	'
+  let oldhlsearch=&hlsearch
+  if !a:0
+    let &hlsearch=!&hlsearch
+  else
+    let &hlsearch=a:1
+  end
+  return oldhlsearch
+endfunction
+
 function ShowSpaces(...)
   let @/='\v(\s+$)|( +\ze\t)'
   let oldhlsearch=&hlsearch
@@ -279,12 +290,13 @@ function TrimSpaces() range
   let oldhlsearch=ShowSpaces(1)
   execute a:firstline.",".a:lastline."substitute ///gec"
   let &hlsearch=oldhlsearch
-  execute "%s/    /    /gec"
+  execute "%s/	/    /gec"
 endfunction
 
+command -bar -nargs=? ShowSpacesTab call ShowSpacesTab(<args>)
 command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
 command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
-nnoremap <F12>     :ShowSpaces 1<CR>
+nnoremap <F12>     :ShowSpacesTab 1<CR>
 nnoremap <S-F12>   m`:TrimSpaces<CR>``
 vnoremap <S-F12>   :TrimSpaces<CR>
 
