@@ -1,6 +1,7 @@
 "使用vim-plug
 filetype  on   "否则autoload无法加载
 filetype plugin indent on
+set filetype=unix
 syntax on
 
 "filetype plugin indent on
@@ -17,7 +18,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'kien/ctrlp.vim'  "search
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'ervandew/supertab' "using tab for completion
-Plug 'majutsushi/tagbar' 
+Plug 'majutsushi/tagbar'
 Plug 'jrosiek/vim-mark'
 Plug 'tpope/vim-fugitive'  "git branch show support
 "Plug 'powerline/powerline'
@@ -25,11 +26,12 @@ Plug 'rizzatti/dash.vim'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'szw/vim-tags'
-Plug 'vhda/verilog_systemverilog.vim'  "verilog autocompletion and code naviagation. 
+Plug 'vhda/verilog_systemverilog.vim'  "verilog autocompletion and code naviagation.
 Plug 'kchmck/vim-coffee-script'  "syntax highlight and indent for coffee-script
 Plug 'artur-shaik/vim-javacomplete2'  "autocomplete for java
+Plug 'nvie/vim-flake8' "PEP8 static syntax& style check for vim
 " " All of your Plugins must be added before the following line
-call plug#end()         
+call plug#end()
 
 "Start Basic Configurations"
 "Coding
@@ -54,7 +56,8 @@ set showmatch
 "No compatitble with vi
 set nocompatible
 "Indent&no tab, just 4 spaces
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
+set autoindent
 if &term=="xterm"
     set t_Co=8
     set t_Sb=^[[4%dm
@@ -104,31 +107,31 @@ set guifont=Monaco_for_Powerline:h12
 "set autocomplete choose key to return
 inoremap <expr> <CR> ((pumvisible())?("\<C-y>"):("\n"))
 "cscope settings
-nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR> 
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR> 
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR> 
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR> 
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR> 
-nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR> 
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR> 
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-"nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>    
-"nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>    
-"nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>    
-"nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>    
-"nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>    
-"nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>    
-"nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>  
-"nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>    
+"nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+"nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+"nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
 
 nmap <C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>   
-nmap <C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR> 
+nmap <C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 
 "set cursorline
@@ -139,7 +142,7 @@ set pastetoggle=<F2>
 "set <F1> as search highlight"
 let hlstate=0
 nnoremap <silent><F1> :if (hlstate == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=1-hlstate<cr>
-"End Basic Configurations" 
+"End Basic Configurations"
 """"""""""""""""""""""""""""""""""""""""
 "Start User's Configurations"
 ""reload the file when changed
@@ -158,29 +161,29 @@ map <F8> :make<CR>
 
 "Auto match brackets
 function! AutoPair(open, close)
-	        let line = getline('.')
-			if col('.') > strlen(line) || line[col('.') - 1] == ' '
-				return a:open.a:close."\<ESC>i"
-			else
-				return a:open
-		    endif
+            let line = getline('.')
+            if col('.') > strlen(line) || line[col('.') - 1] == ' '
+                return a:open.a:close."\<ESC>i"
+            else
+                return a:open
+            endif
 endf
 function! ClosePair(char)
-	        if getline('.')[col('.') - 1] == a:char
-		       return "\<Right>"
-		    else
-		       return a:char
-		    endif
+            if getline('.')[col('.') - 1] == a:char
+               return "\<Right>"
+            else
+               return a:char
+            endif
 endf
 function! SamePair(char)
-	        let line = getline('.')
-			if col('.') > strlen(line) || line[col('.') - 1] == ' '
-			   return a:char.a:char."\<ESC>i"
-			elseif line[col('.') - 1] == a:char
-			   return "\<Right>"
-			else
-			   return a:char
-		    endif
+            let line = getline('.')
+            if col('.') > strlen(line) || line[col('.') - 1] == ' '
+               return a:char.a:char."\<ESC>i"
+            elseif line[col('.') - 1] == a:char
+               return "\<Right>"
+            else
+               return a:char
+            endif
 endf
 inoremap ( <c-r>=AutoPair('(', ')')<CR>
 inoremap ) <c-r>=ClosePair(')')<CR>
@@ -196,15 +199,24 @@ inoremap ` <c-r>=SamePair('`')<CR>
 "just vim build-in command, like global(g), replace(s), etc"
 "for C/CXX files
 autocmd bufnewfile *.{c,cpp,cc} so ~/.vim/headers/c_cpp_headers.tmpl
-autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma")
+autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
 autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
 autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp} execute "normal ma"
 autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp} exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
 autocmd bufwritepost,filewritepost *.{c,cpp,h,hpp} execute "normal `a"
+" for verilog file
+autocmd bufnewfile *.v so ~/.vim/headers/verilog.tmpl
+autocmd bufnewfile *.v exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.v exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.v exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.v execute "normal ma"
+autocmd Bufwritepre,filewritepre *.v exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.v execute "normal `a"
+
 "for Python files
 autocmd bufnewfile *.py so ~/.vim/headers/py_headers.tmpl
-autocmd bufnewfile *.py exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma")
+autocmd bufnewfile *.py exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
 autocmd bufnewfile *.py exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
 autocmd bufnewfile *.py exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 autocmd Bufwritepre,filewritepre *.py execute "normal ma"
@@ -212,7 +224,7 @@ autocmd Bufwritepre,filewritepre *.py exe "1," . 9 . "g/Last Modified :.*/s/Last
 autocmd bufwritepost,filewritepost *.py execute "normal `a"
 "for Ruby files
 autocmd bufnewfile *.rb so ~/.vim/headers/rb_headers.tmpl
-autocmd bufnewfile *.rb exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma")
+autocmd bufnewfile *.rb exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
 autocmd bufnewfile *.rb exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
 autocmd bufnewfile *.rb exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 autocmd Bufwritepre,filewritepre *.rb execute "normal ma"
@@ -220,7 +232,7 @@ autocmd Bufwritepre,filewritepre *.rb exe "1," . 9 . "g/Last Modified :.*/s/Last
 autocmd bufwritepost,filewritepost *.rb execute "normal `a"
 "for Shell scripts
 autocmd bufnewfile *.sh so ~/.vim/headers/sh_headers.tmpl
-autocmd bufnewfile *.sh exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma")
+autocmd bufnewfile *.sh exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
 autocmd bufnewfile *.sh exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
 autocmd bufnewfile *.sh exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 autocmd Bufwritepre,filewritepre *.sh execute "normal ma"
@@ -228,7 +240,7 @@ autocmd Bufwritepre,filewritepre *.sh exe "1," . 7 . "g/Last Modified :.*/s/Last
 autocmd bufwritepost,filewritepost *.sh execute "normal `a"
 "for java files
 autocmd bufnewfile *.java so ~/.vim/headers/java_headers.tmpl
-autocmd bufnewfile *.java exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma")
+autocmd bufnewfile *.java exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
 autocmd bufnewfile *.java exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
 autocmd bufnewfile *.java exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 autocmd Bufwritepre,filewritepre *.sh execute "normal ma"
@@ -251,7 +263,30 @@ function! s:insert_gates()
     normal! kk
 endfunction
 autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
+"for convert tab to 4 spaces and remove unwanted spaces
+function ShowSpaces(...)
+  let @/='\v(\s+$)|( +\ze\t)'
+  let oldhlsearch=&hlsearch
+  if !a:0
+    let &hlsearch=!&hlsearch
+  else
+    let &hlsearch=a:1
+  end
+  return oldhlsearch
+endfunction
 
+function TrimSpaces() range
+  let oldhlsearch=ShowSpaces(1)
+  execute a:firstline.",".a:lastline."substitute ///gec"
+  let &hlsearch=oldhlsearch
+  execute "%s/    /    /gec"
+endfunction
+
+command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
+command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
+nnoremap <F12>     :ShowSpaces 1<CR>
+nnoremap <S-F12>   m`:TrimSpaces<CR>``
+vnoremap <S-F12>   :TrimSpaces<CR>
 
 "End User's Configurations"
 """""""""""""""""""""""""""""""""""""""
@@ -272,7 +307,7 @@ set modifiable
 let g:NERDTree_autofocus = 1
 
 "airline
-set laststatus=2   "总是显示状态栏 
+set laststatus=2   "总是显示状态栏
 let g:airline_inactive_collapse=1
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
@@ -295,10 +330,15 @@ let g:airline#extensions#whitespace#enabled = 0
 " for ycm
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
-let g:ycm_python_binary_path = '/usr/local/bin/python3'
+let g:ycm_python_binary_path = '/usr/local/bin/python'
+let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
 nmap <F9> :YcmCompleter GoToDeclaration<CR>
 nmap <F10> :YcmCompleter GoToDefinition<CR>
-
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
 "for tagbar
 nmap <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
@@ -316,7 +356,15 @@ au Syntax * RainbowParenthesesLoadBraces
 "
 "for vim-javacomplete2
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-
-
+"for automatic.vim
+map <F5> <C-w><C-w>
+"nnoremap <S-F1> :call AutoArg()<CR>
+"nnoremap <S-F2> :call AutoInst(0)<CR>
+"nnoremap <S-F3> :call AutoDef()<CR>
+" save cursor position at exit edit file
+"autocmd BufReadPost *
+"    \ if (line("'\"") > 0 && line("'\"") <= line("$") |
+"    \    exe "normal g`\"" |
+"    \ endif
+"
 
