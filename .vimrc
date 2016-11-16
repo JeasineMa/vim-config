@@ -16,7 +16,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic' "grammar check
 Plug 'Yggdroot/indentLine'
 Plug 'kien/ctrlp.vim'  "search
-Plug 'kien/rainbow_parentheses.vim'
+"Plug 'kien/rainbow_parentheses.vim'
 Plug 'ervandew/supertab' "using tab for completion
 Plug 'majutsushi/tagbar'
 Plug 'jrosiek/vim-mark'
@@ -30,6 +30,7 @@ Plug 'vhda/verilog_systemverilog.vim'  "verilog autocompletion and code naviagat
 Plug 'kchmck/vim-coffee-script'  "syntax highlight and indent for coffee-script
 Plug 'artur-shaik/vim-javacomplete2'  "autocomplete for java
 Plug 'nvie/vim-flake8' "PEP8 static syntax& style check for vim
+Plug 'luochen1990/rainbow' "improved rainbow parentheses
 " " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -354,12 +355,6 @@ let g:ycm_complete_in_strings = 1 " Completion in string
 "for tagbar
 nmap <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
-
-"for rainbow"
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
 
 "for verilog-vim
 "nnoremap <C-W> :VerilogFollowInstance<CR>
