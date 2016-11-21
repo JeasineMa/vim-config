@@ -154,11 +154,9 @@ endif
 map <F8> :make<CR>
 
 "Auto load tags
-"if exists("tags")
-":insert
-"dsf
-"    set tags=./tags
-"endif
+if exists("tags")
+    set tags=./tags
+endif
 
 "Auto match brackets
 function! AutoPair(open, close)
