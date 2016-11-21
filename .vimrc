@@ -1,5 +1,7 @@
 "使用vim-plug
-filetype  off   "否则autoload无法加载
+filetype  on   "否则autoload无法加载
+filetype plugin indent on
+set filetype=unix
 syntax on
 
 "filetype plugin indent on
@@ -24,9 +26,12 @@ Plug 'rizzatti/dash.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'taketwo/vim-ros'
 Plug 'rdnetto/YCM-Generator',{'branch': 'stable'}
+Plug 'nvie/vim-flake8' "PEP8 static syntax& style check for vim
+Plug 'kchmck/vim-coffee-script'  "syntax highlight and indent for coffee-script
+Plug 'artur-shaik/vim-javacomplete2'  "autocomplete for java
 
 " " All of your Plugins must be added before the following line
-call plug#end()         
+call plug#end()
 
 "Start Basic Configurations"
 "Coding
@@ -64,7 +69,7 @@ endif
 "Filetype detect
 filetype on
 "Set default shell
-set shell=/bin/bash
+set shell=/usr/bin/zsh
 "amounts of histroy recorded
 set history=400
 "设置ambiwidth
@@ -194,6 +199,65 @@ inoremap " <c-r>=SamePair('"')<CR>
 inoremap ' <c-r>=SamePair("'")<CR>
 inoremap ` <c-r>=SamePair('`')<CR>
 
+"Auto file headers
+"just vim build-in command, like global(g), replace(s), etc"
+"for C/CXX files
+autocmd bufnewfile *.{c,cpp,cc} so ~/.vim/headers/c_cpp_headers.tmpl
+autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp} execute "normal ma"
+autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp} exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.{c,cpp,h,hpp} execute "normal `a"
+" for verilog file
+autocmd bufnewfile *.v so ~/.vim/headers/verilog.tmpl
+autocmd bufnewfile *.v exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.v exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.v exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.v execute "normal ma"
+autocmd Bufwritepre,filewritepre *.v exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.v execute "normal `a"
+
+"for Python files
+autocmd bufnewfile *.py so ~/.vim/headers/py_headers.tmpl
+autocmd bufnewfile *.py exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.py exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.py exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.py execute "normal ma"
+autocmd Bufwritepre,filewritepre *.py exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.py execute "normal `a"
+"for Ruby files
+autocmd bufnewfile *.rb so ~/.vim/headers/rb_headers.tmpl
+autocmd bufnewfile *.rb exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.rb exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.rb exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.rb execute "normal ma"
+autocmd Bufwritepre,filewritepre *.rb exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.rb execute "normal `a"
+"for Shell scripts
+autocmd bufnewfile *.sh so ~/.vim/headers/sh_headers.tmpl
+autocmd bufnewfile *.sh exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.sh exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.sh exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.sh execute "normal ma"
+autocmd Bufwritepre,filewritepre *.sh exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.sh execute "normal `a"
+"for java files
+autocmd bufnewfile *.java so ~/.vim/headers/java_headers.tmpl
+autocmd bufnewfile *.java exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.java exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.java exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.sh execute "normal ma"
+autocmd Bufwritepre,filewritepre *.sh exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.sh execute "normal `a"
+"for makefile
+autocmd bufnewfile makefile 0r ~/.vim/headers/makefile_headers.tmpl
+"for ros_msg
+autocmd bufnewfile *.msg 0r ~/.vim/headers/ros_msg_headers.tmpl
+"for ros_srv
+autocmd bufnewfile *.srv 0r ~/.vim/headers/ros_srv_headers.tmpl
+"for ros_actionlib
+autocmd bufnewfile *.action 0r ~/.vim/headers/ros_action_headers.tmpl
 "for generate guard for header file
 function! s:insert_gates()
     let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
@@ -203,6 +267,42 @@ function! s:insert_gates()
     normal! kk
 endfunction
 autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
+"for convert tab to 4 spaces and remove unwanted spaces
+function ShowSpacesTab(...)
+  let @/='\v(\s+$)|( +\ze\t)|	'
+  let oldhlsearch=&hlsearch
+  if !a:0
+    let &hlsearch=!&hlsearch
+  else
+    let &hlsearch=a:1
+  end
+  return oldhlsearch
+endfunction
+
+function ShowSpaces(...)
+  let @/='\v(\s+$)|( +\ze\t)'
+  let oldhlsearch=&hlsearch
+  if !a:0
+    let &hlsearch=!&hlsearch
+  else
+    let &hlsearch=a:1
+  end
+  return oldhlsearch
+endfunction
+
+function TrimSpaces() range
+  let oldhlsearch=ShowSpaces(1)
+  execute a:firstline.",".a:lastline."substitute ///gec"
+  let &hlsearch=oldhlsearch
+  execute "%s/	/    /gec"
+endfunction
+
+command -bar -nargs=? ShowSpacesTab call ShowSpacesTab(<args>)
+command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
+command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
+nnoremap <F12>     :ShowSpacesTab 1<CR>
+nnoremap <S-F12>   m`:TrimSpaces<CR>``
+vnoremap <S-F12>   :TrimSpaces<CR>
 
 "End User's Configurations"
 """""""""""""""""""""""""""""""""""""""
@@ -223,7 +323,7 @@ set modifiable
 let g:NERDTree_autofocus = 1
 
 "airline
-set laststatus=2   "总是显示状态栏 
+set laststatus=2   "总是显示状态栏
 let g:airline_inactive_collapse=1
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
@@ -233,6 +333,7 @@ let g:airline_powerline_fonts = 1
 "let g:airline_theme = "solarized"
 let g:airline_theme = "powerlineish"
 let g:airline#extensions#tabline#enabled = 1
+<<<<<<< HEAD
 let g:airline#extensions#bufferline#enabled = 1
 """let g:airline#extensions#bufferline#overwrite_variables = 1
 let g:airline#extensions#branch#enabled = 1
@@ -270,3 +371,22 @@ let g:ycm_semantic_triggers = {
 \	'roslaunch' : ['=', '$(', '/'],
 \	'rosmsg,rossrv,rosaction' : ['re!^', '/'],
 \}
+"
+"for verilog-vim
+"nnoremap <C-W> :VerilogFollowInstance<CR>
+"nnoremap <C-W> :VerilogFollowPort<CR>
+"nnoremap <C-W> :VerilogGotoInstanceStart<CR>
+"
+"for vim-javacomplete2
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"for automatic.vim
+map <F5> <C-w><C-w>
+"nnoremap <S-F1> :call AutoArg()<CR>
+"nnoremap <S-F2> :call AutoInst(0)<CR>
+"nnoremap <S-F3> :call AutoDef()<CR>
+" save cursor position at exit edit file
+"autocmd BufReadPost *
+"    \ if (line("'\"") > 0 && line("'\"") <= line("$") |
+"    \    exe "normal g`\"" |
+"    \ endif
+"
