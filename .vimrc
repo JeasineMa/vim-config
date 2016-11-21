@@ -47,7 +47,7 @@ syntax on
 "Line nu
 set nu
 "Color theme
-colorscheme solarized
+"colorscheme solarized
 "Use mouse
 set mouse=a
 set selection=exclusive
@@ -95,7 +95,7 @@ set number
 set ruler
 "For solarized plugin (color scheme)
 set background=dark   "必须保证此顺序
-colorscheme solarized
+colorscheme desert
 "Share the clipboard with system
 set clipboard=unnamed
 "close the scratch window
@@ -136,7 +136,7 @@ nmap <C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 
 "set cursorline
-set cursorline
+"set cursorline
 
 "set paste with key-bindings to avoid indent chaos when pasting codes.
 set pastetoggle=<F2>
@@ -327,8 +327,8 @@ let g:airline_detect_paste=1
 let g:airline_detect_crypt=1
 let g:airline_detect_iminsert=0
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "solarized"
-"let g:airline_theme = "powerlineish"
+"let g:airline_theme = "solarized"
+let g:airline_theme = "powerlineish"
 let g:airline#extensions#tabline#enabled = 1
 ""let g:airline#extensions#bufferline#enabled = 1
 ""let g:airline#extensions#bufferline#overwrite_variables = 1
