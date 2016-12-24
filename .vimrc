@@ -31,6 +31,8 @@ Plug 'kchmck/vim-coffee-script'  "syntax highlight and indent for coffee-script
 Plug 'artur-shaik/vim-javacomplete2'  "autocomplete for java
 Plug 'nvie/vim-flake8' "PEP8 static syntax& style check for vim
 Plug 'luochen1990/rainbow' "improved rainbow parentheses
+Plug 'leafgarland/typescript-vim' "syntax highlight for typescript
+Plug 'rust-lang/rust.vim' "useful tools for rust-lang
 " " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -253,6 +255,8 @@ autocmd bufnewfile *.msg 0r ~/.vim/headers/ros_msg_headers.tmpl
 autocmd bufnewfile *.srv 0r ~/.vim/headers/ros_srv_headers.tmpl
 "for ros_actionlib
 autocmd bufnewfile *.action 0r ~/.vim/headers/ros_action_headers.tmpl
+"for CMakeLists.txt
+autocmd bufnewfile CMakeLists.txt 0r ~/.vim/headers/cmakelist.tmpl
 "for generate guard for header file
 function! s:insert_gates()
     let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
