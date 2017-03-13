@@ -8,6 +8,7 @@ syntax on
 call plug#begin('~/.vim/bundle')
 
 "Plugin list
+
 Plug 'Valloric/YouCompleteMe'
 Plug 'bling/vim-airline'
 "Plug 'plasticboy/vim-markdown'
@@ -36,28 +37,40 @@ Plug 'rust-lang/rust.vim' "useful tools for rust-lang
 " " All of your Plugins must be added before the following line
 call plug#end()
 
+""""""""""""""""""""""""""""
 "Start Basic Configurations"
+
 "Coding
 set encoding=utf-8
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set fileencodings=utf-8,ucs-bom,chinese
+
 "Lang
 set langmenu=zh_CN.UTF-8
+
 "Syntax
 syntax enable
 syntax on
+
 "Line nu
 set nu
+
 "Color theme
-"colorscheme solarized
+"For solarized plugin (color scheme)
+set background=dark   "必须保证此顺序
+colorscheme desert
+
 "Use mouse
 set mouse=a
 set selection=exclusive
 set selectmode=mouse,key
+
 "Highlight match brackets
 set showmatch
+
 "No compatitble with vi
 set nocompatible
+
 "Indent&no tab, just 4 spaces
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set autoindent
@@ -66,49 +79,63 @@ if &term=="xterm"
     set t_Sb=^[[4%dm
     set t_Sf=^[[3%dm
 endif
+
 "Filetype detect, must place after load the YCM
 filetype on
+
 "Set default shell
 set shell=fish
+
 "amounts of histroy recorded
 set history=400
+
 "设置ambiwidth
 set ambiwidth=single
+
 "file types
 set ffs=unix,dos,mac
+
 "increase search
 set incsearch
+
 "MUTE
 set noerrorbells
 set novisualbell
 set t_vb=
+
 "Nobackup
 set nobackup
 set nowb
+
 "cusor shape
 set gcr=n-v-c:ver25-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver10-Cursor/lCursor
+
 "backspace enable
 set backspace=2
 set bs=2
 set ts=4
 set sw=4
 set number
+
 "shows row and column number at bottom right corner
 set ruler
-"For solarized plugin (color scheme)
-set background=dark   "必须保证此顺序
-colorscheme desert
+
 "Share the clipboard with system
 set clipboard=unnamed
+
 "close the scratch window
 set completeopt-=preview
+
 "remap the jump shortkey
 map <A-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <C-/> :vsp <CR>:exec("tag ".expand("<cword>")<CR>
+
 "set MacVim font
 set guifont=Monaco_for_Powerline:h12
+
 "set autocomplete choose key to return
 inoremap <expr> <CR> ((pumvisible())?("\<C-y>"):("\n"))
+
 "cscope settings
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -137,14 +164,19 @@ nmap <C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 
-"set cursorline
+"for cursorline
 "set cursorline
 
 "set paste with key-bindings to avoid indent chaos when pasting codes.
 set pastetoggle=<F2>
+
 "set <F1> as search highlight"
 let hlstate=0
 nnoremap <silent><F1> :if (hlstate == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=1-hlstate<cr>
+
+" auto load cscope.out
+autocmd VimEnter * cs add cscope.out
+
 "End Basic Configurations"
 """"""""""""""""""""""""""""""""""""""""
 "Start User's Configurations"
@@ -354,6 +386,7 @@ let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
 let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
 let g:ycm_complete_in_comments = 1 " Completion in comments
 let g:ycm_complete_in_strings = 1 " Completion in string
+let g:ycm_global_ycm_extra_conf = "~/.ycm_extra_conf.py"
 "for tagbar
 nmap <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
@@ -362,9 +395,10 @@ let g:tagbar_autofocus = 1
 "nnoremap <C-W> :VerilogFollowInstance<CR>
 "nnoremap <C-W> :VerilogFollowPort<CR>
 "nnoremap <C-W> :VerilogGotoInstanceStart<CR>
-"
+
 "for vim-javacomplete2
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
 "for automatic.vim
 map <F5> <C-w><C-w>
 "nnoremap <S-F1> :call AutoArg()<CR>
