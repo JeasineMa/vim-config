@@ -16,7 +16,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'kien/rainbow_parentheses.vim'
 Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
@@ -357,9 +357,8 @@ let g:airline_powerline_fonts = 1
 "let g:airline_theme = "solarized"
 let g:airline_theme = "powerlineish"
 let g:airline#extensions#tabline#enabled = 1
-<<<<<<< HEAD
 let g:airline#extensions#bufferline#enabled = 1
-"""let g:airline#extensions#bufferline#overwrite_variables = 1
+"let g:airline#extensions#bufferline#overwrite_variables = 1
 let g:airline#extensions#branch#enabled = 1
 "let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
@@ -378,8 +377,8 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>dc :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nmap <F4> :YcmDiags<CR>"
 let g:ycm_global_ycm_extra_conf = "~/.ycm_extra_conf.py"
+
 "for tagbar
 nmap <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
