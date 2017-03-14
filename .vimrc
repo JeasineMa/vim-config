@@ -8,6 +8,7 @@ syntax on
 call plug#begin('~/.vim/bundle')
 
 "Plugin list
+
 Plug 'Valloric/YouCompleteMe'
 Plug 'bling/vim-airline'
 Plug 'plasticboy/vim-markdown'
@@ -29,32 +30,43 @@ Plug 'rdnetto/YCM-Generator',{'branch': 'stable'}
 Plug 'nvie/vim-flake8' "PEP8 static syntax& style check for vim
 Plug 'kchmck/vim-coffee-script'  "syntax highlight and indent for coffee-script
 Plug 'artur-shaik/vim-javacomplete2'  "autocomplete for java
-
 " " All of your Plugins must be added before the following line
 call plug#end()
 
+""""""""""""""""""""""""""""
 "Start Basic Configurations"
+
 "Coding
 set encoding=utf-8
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set fileencodings=utf-8,ucs-bom,chinese
+
 "Lang
 set langmenu=zh_CN.UTF-8
+
 "Syntax
 syntax enable
 syntax on
+
 "Line nu
 set nu
+
 "Color theme
-"colorscheme solarized
+"For solarized plugin (color scheme)
+set background=dark   "必须保证此顺序
+colorscheme desert
+
 "Use mouse
 set mouse=a
 set selection=exclusive
 set selectmode=mouse,key
+
 "Highlight match brackets
 set showmatch
+
 "No compatitble with vi
 set nocompatible
+"
 "Indent
 set tabstop=4
 set softtabstop=4
@@ -66,39 +78,46 @@ if &term=="xterm"
     set t_Sb=^[[4%dm
     set t_Sf=^[[3%dm
 endif
+"
 "Filetype detect
 filetype on
+
 "Set default shell
 set shell=/usr/bin/zsh
+
 "amounts of histroy recorded
 set history=400
+
 "设置ambiwidth
 set ambiwidth=single
+
 "file types
 set ffs=unix,dos,mac
+
 "increase search
 set incsearch
+
 "MUTE
 set noerrorbells
 set novisualbell
 set t_vb=
+
 "Nobackup
 set nobackup
 set nowb
+
 "cusor shape
 set gcr=n-v-c:ver25-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver10-Cursor/lCursor
+
 "backspace enable
 set backspace=2
 set bs=2
 set ts=4
 set sw=4
 set number
+
 "shows row and column number at bottom right corner
 set ruler
-"For solarized plugin (color scheme)
-syntax enable
-"set background=dark   "必须保证此顺序
-colorscheme desert
 
 set t_Co=256
 let g:solarized_termcolors=256
@@ -137,7 +156,7 @@ nmap <C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR> 
 nmap <C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 
-"set cursorline
+"for cursorline
 "set cursorline
 
 "set paste with key-bindings to avoid indent chaos when pasting codes.
@@ -147,7 +166,10 @@ set pastetoggle=<F2>
 let hlstate=0
 nnoremap <silent><F1> :if (hlstate == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=1-hlstate<cr>
 
-"End Basic Configurations" 
+" auto load cscope.out
+autocmd VimEnter * cs add cscope.out
+
+"End Basic Configurations"
 """"""""""""""""""""""""""""""""""""""""
 
 "Start User's Configurations"
@@ -258,6 +280,8 @@ autocmd bufnewfile *.msg 0r ~/.vim/headers/ros_msg_headers.tmpl
 autocmd bufnewfile *.srv 0r ~/.vim/headers/ros_srv_headers.tmpl
 "for ros_actionlib
 autocmd bufnewfile *.action 0r ~/.vim/headers/ros_action_headers.tmpl
+"for CMakeLists.txt
+autocmd bufnewfile CMakeLists.txt 0r ~/.vim/headers/cmakelist.tmpl
 "for generate guard for header file
 function! s:insert_gates()
     let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
@@ -355,7 +379,7 @@ nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>dc :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap <F4> :YcmDiags<CR>"
-
+let g:ycm_global_ycm_extra_conf = "~/.ycm_extra_conf.py"
 "for tagbar
 nmap <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
@@ -376,9 +400,10 @@ let g:ycm_semantic_triggers = {
 "nnoremap <C-W> :VerilogFollowInstance<CR>
 "nnoremap <C-W> :VerilogFollowPort<CR>
 "nnoremap <C-W> :VerilogGotoInstanceStart<CR>
-"
+
 "for vim-javacomplete2
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
 "for automatic.vim
 map <F5> <C-w><C-w>
 "nnoremap <S-F1> :call AutoArg()<CR>
