@@ -1,0 +1,43 @@
+cmake_minimum_required (VERSION 2.6)
+project (PROJ_NAME)
+
+# path
+set (BASE_PATH ./)
+set (SOME_LIB_PATH ../some_lib/.)
+
+# for c++11
+add_definitions(-std=c++11)
+
+# Dependency
+# boost
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+find_package(Boost 1.48.0 COMPONENTS system thread)
+
+# pthread
+find_package(Threads)
+
+if(Boost_FOUND)
+
+    # include
+    include_directories(
+        ${BASE_PATH}
+        ${BASE_PATH}../sample/inc_sample
+        ${SOME_LIB_PATH}lib/rapidjson/include
+        ${Boost_INCLUDE_DIRS}
+    )
+
+    # add executable
+    set (${PROJECT_NAME}_SRC
+        ${SOME_LIB_PATH}src/sio_client.cpp
+		${BASE_PATH}../src/main.cpp
+    )
+    add_executable (${PROJECT_NAME} ${${PROJECT_NAME}_SRC})
+    target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
+
+endif()
+
+# test
+# TODO
+
