@@ -253,13 +253,13 @@ inoremap ` <c-r>=SamePair('`')<CR>
 "Auto file headers
 "just vim build-in command, like global(g), replace(s), etc"
 "for C/CXX files
-autocmd bufnewfile *.{c,cpp,cc} so ~/.vim/headers/c_cpp_headers.tmpl
-autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
-autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
-autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
-autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp} execute "normal ma"
-autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp} exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
-autocmd bufwritepost,filewritepost *.{c,cpp,h,hpp} execute "normal `a"
+autocmd bufnewfile *.{c,cpp,cc,h,hpp,tcc} so ~/.vim/headers/c_cpp_headers.tmpl
+autocmd bufnewfile *.{c,cpp,cc,h,hpp,tcc} exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.{c,cpp,cc,h,hpp,tcc} exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.{c,cpp,cc,h,hpp,tcc} exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp,cc,tcc} execute "normal ma"
+autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp,cc,tcc} exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.{c,cpp,h,hpp,cc,tcc} execute "normal `a"
 " for verilog file
 autocmd bufnewfile *.v so ~/.vim/headers/verilog.tmpl
 autocmd bufnewfile *.v exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
@@ -314,12 +314,12 @@ autocmd bufnewfile CMakeLists.txt 0r ~/.vim/headers/cmakelist.tmpl
 "for generate guard for header file
 function! s:insert_gates()
     let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
-    execute "normal! i#ifndef " . gatename
+    execute "normal! Gi#ifndef " . gatename
     execute "normal! o#define " . gatename . " "
     execute "normal! Go#endif /* " . gatename . " */"
     normal! kk
 endfunction
-autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
+autocmd BufNewFile *.{h,hpp,tcc} call <SID>insert_gates()
 
 "for convert tab to 4 spaces and remove unwanted spaces
 function ShowSpacesTab(...)
