@@ -270,20 +270,13 @@ autocmd Bufwritepre,filewritepre *.v execute "normal ma"
 autocmd Bufwritepre,filewritepre *.v exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
 autocmd bufwritepost,filewritepost *.v execute "normal `a"
 "for Python files
-function s:create_py(file_name)
-    if a:file_name == "__init__.py"
-        so ~/.vim/headers/initpy.tmpl
-    else
-        autocmd bufnewfile *.py so ~/.vim/headers/py_headers.tmpl
-        autocmd bufnewfile *.py exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
-        autocmd bufnewfile *.py exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
-        autocmd bufnewfile *.py exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
-        autocmd Bufwritepre,filewritepre *.py execute "normal ma"
-        autocmd Bufwritepre,filewritepre *.py exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
-        autocmd bufwritepost,filewritepost *.py execute "normal `a"
-    end
-endfunction
-"autocmd bufnewfile *.py call <SID>create_py("%")
+autocmd bufnewfile *.py so ~/.vim/headers/py_headers.tmpl
+autocmd bufnewfile *.py exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.py exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.py exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.py execute "normal ma"
+autocmd Bufwritepre,filewritepre *.py exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.py execute "normal `a"
 autocmd bufnewfile *.py so ~/.vim/headers/py_headers.tmpl
 autocmd bufnewfile *.py exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
 autocmd bufnewfile *.py exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
