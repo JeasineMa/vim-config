@@ -35,6 +35,7 @@ Plug 'luochen1990/rainbow' "improved rainbow parentheses
 Plug 'leafgarland/typescript-vim' "syntax highlight for typescript
 Plug 'rust-lang/rust.vim' "useful tools for rust-lang
 Plug 'tell-k/vim-autopep8'
+Plug 'dracula/vim'
 " " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -59,7 +60,7 @@ set nu
 "Color theme
 "For solarized plugin (color scheme)
 set background=dark   "必须保证此顺序
-colorscheme desert
+color dracula
 
 "Use mouse
 set mouse=a
@@ -277,14 +278,6 @@ autocmd bufnewfile *.py exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : "
 autocmd Bufwritepre,filewritepre *.py execute "normal ma"
 autocmd Bufwritepre,filewritepre *.py exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
 autocmd bufwritepost,filewritepost *.py execute "normal `a"
-autocmd bufnewfile *.py so ~/.vim/headers/py_headers.tmpl
-autocmd bufnewfile *.py exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
-autocmd bufnewfile *.py exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
-autocmd bufnewfile *.py exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
-autocmd Bufwritepre,filewritepre *.py execute "normal ma"
-autocmd Bufwritepre,filewritepre *.py exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
-autocmd bufwritepost,filewritepost *.py execute "normal `a"
-
 "for Ruby files
 autocmd bufnewfile *.rb so ~/.vim/headers/rb_headers.tmpl
 autocmd bufnewfile *.rb exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
@@ -394,10 +387,11 @@ let g:airline_detect_crypt=1
 let g:airline_detect_iminsert=0
 let g:airline_powerline_fonts = 1
 "let g:airline_theme = "solarized"
-let g:airline_theme = "powerlineish"
+"let g:airline_theme = "powerlineish"
+let g:airline_theme = "distinguished"
 let g:airline#extensions#tabline#enabled = 1
-""let g:airline#extensions#bufferline#enabled = 1
-""let g:airline#extensions#bufferline#overwrite_variables = 1
+"let g:airline#extensions#bufferline#enabled = 1
+"let g:airline#extensions#bufferline#overwrite_variables = 1
 let g:airline#extensions#branch#enabled = 1
 "let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
