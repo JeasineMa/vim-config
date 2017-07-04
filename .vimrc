@@ -30,6 +30,7 @@ Plug 'rdnetto/YCM-Generator',{'branch': 'stable'}
 Plug 'nvie/vim-flake8' "PEP8 static syntax& style check for vim
 Plug 'kchmck/vim-coffee-script'  "syntax highlight and indent for coffee-script
 Plug 'artur-shaik/vim-javacomplete2'  "autocomplete for java
+Plug 'dracula/vim'
 " " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -54,7 +55,9 @@ set nu
 "Color theme
 "For solarized plugin (color scheme)
 set background=dark   "必须保证此顺序
-colorscheme desert
+"colorscheme desert
+"colorscheme solarized
+color dracula
 
 "Use mouse
 set mouse=a
@@ -355,7 +358,8 @@ let g:airline_detect_crypt=1
 "let g:airline_detect_iminsert=0
 let g:airline_powerline_fonts = 1
 "let g:airline_theme = "solarized"
-let g:airline_theme = "powerlineish"
+let g:airline_theme = "distinguished"
+"let g:airline_theme = "powerlineish"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#bufferline#enabled = 1
 "let g:airline#extensions#bufferline#overwrite_variables = 1
