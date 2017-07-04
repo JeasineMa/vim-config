@@ -1,5 +1,9 @@
 cmake_minimum_required (VERSION 2.6)
 
+# for cross compile
+SET(CMAKE_C_COMPILER   /usr/local/bin/gcc-7)
+SET(CMAKE_CXX_COMPILER /usr/local/bin/g++-7)
+
 # project
 set(PROJECT_NAME MyProject)
 project(${PROJECT_NAME})
@@ -56,6 +60,18 @@ endif()
 
 
 # Dependency
+# global pakcage
+# for mstch
+find_package (mstch)
+include_directories(${MSTCH_INCLUDE_DIRS})
+target_link_libraries (${PROJECT_NAME} mstch::mstch)
+
+# customized lib
+# for socketio
+find_library(SOCKETIO_LIBRARY sioclient HINTS ${BASE_PATH}/third_party/socket.io-client-cpp)
+include_directories(${BASE_PATH}third_party/socket.io-client-cpp/build/include)
+target_link_libraries(${PROJECT_NAME} ${SOCKETIO_LIBRARY})
+
 # boost
 # set(Boost_USE_STATIC_LIBS OFF)
 # set(Boost_USE_MULTITHREADED ON)

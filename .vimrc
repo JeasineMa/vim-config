@@ -36,6 +36,7 @@ Plug 'leafgarland/typescript-vim' "syntax highlight for typescript
 Plug 'rust-lang/rust.vim' "useful tools for rust-lang
 Plug 'tell-k/vim-autopep8'
 Plug 'dracula/vim'
+Plug 'fatih/vim-go'
 " " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -167,7 +168,7 @@ nmap <C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 
 "for cursorline
-"set cursorline
+set cursorline
 
 "set paste with key-bindings to avoid indent chaos when pasting codes.
 " set pastetoggle=<F2>
@@ -399,6 +400,7 @@ let g:airline#extensions#tagbar#enabled = 1
 "let g:airline_left_sep=''
 "let g:airline_right_sep=''
 let g:airline#extensions#whitespace#enabled = 0
+nmap <F2> :AirlineToggle<CR>
 
 " for ycm
 let g:ycm_error_symbol = '>>'
