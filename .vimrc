@@ -16,7 +16,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-syntastic/syntastic' "grammar check
 Plug 'Yggdroot/indentLine'
-Plug 'kien/ctrlp.vim'  "search
+Plug 'ctrlpvim/ctrlp.vim'  "search
 "Plug 'kien/rainbow_parentheses.vim'
 Plug 'ervandew/supertab' "using tab for completion
 Plug 'majutsushi/tagbar'
@@ -362,6 +362,16 @@ nnoremap <F12>     :ShowSpacesTab 1<CR>
 nnoremap <S-F12>   m`:TrimSpaces<CR>``
 vnoremap <S-F12>   :TrimSpaces<CR>
 
+"for alternate tab switch 
+nnoremap <C-h> :tabprevious<CR>
+nnoremap <C-l>   :tabnext<CR>
+nnoremap <C-n>     :tabnew<CR>
+inoremap <C-h> <Esc>:tabprevious<CR>i
+inoremap <C-l>   <Esc>:tabnext<CR>i
+inoremap <C-n>     <Esc>:tabnew<CR>
+"make use of vim's hjkl
+map <C-j> <C-f>
+map <C-k> <C-b>
 
 "End User's Configurations"
 """""""""""""""""""""""""""""""""""""""
@@ -458,3 +468,8 @@ map <F5> <C-w><C-w>
 
 "for vim-autopep8
 let g:autopep8_disable_show_diff=1
+
+"for ctrl-p
+let g:ctrlp_open_new_file = 't'
+let g:ctrlp_max_files = 500
+let g:ctrlp_max_depth = 5

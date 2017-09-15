@@ -261,7 +261,7 @@ amenu icon=$HOME/.vim/after/alnn.xpm     ToolBar.alnn                   :call Al
 "Command definition{{{1
 
 command RtlTree                                                         :call RtlTree()
-map <C-J>                                                               :call ShowInst()<ESC>
+"map <C-J>                                                               :call ShowInst()<ESC>
 map <CA-A>                                                              :call ShowCall()<ESC>
 map <CA-N>                                                              :call ShowDef()<ESC>
 map <C-F1>                                                              :call AutoArg()<ESC>
