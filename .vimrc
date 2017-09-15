@@ -10,7 +10,7 @@ call plug#begin('~/.vim/bundle')
 "Plugin list
 
 Plug 'Valloric/YouCompleteMe'
-Plug 'bling/vim-airline'
+"Plug 'bling/vim-airline'
 "Plug 'plasticboy/vim-markdown'
 "Plug 'lervag/vim-latex'
 Plug 'scrooloose/nerdtree'
@@ -37,7 +37,8 @@ Plug 'rust-lang/rust.vim' "useful tools for rust-lang
 Plug 'tell-k/vim-autopep8'
 Plug 'dracula/vim'
 Plug 'fatih/vim-go'
-" " All of your Plugins must be added before the following line
+Plug 'tpope/vim-sensible' "some good features 
+" " All of your Plugins must be added before the following line 
 call plug#end()
 
 """"""""""""""""""""""""""""
@@ -405,8 +406,8 @@ nmap <F2> :AirlineToggle<CR>
 " for ycm
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
-let g:ycm_python_binary_path = '/usr/local/bin/python'
-let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
+let g:ycm_python_binary_path = '/usr/local/bin/python3'
+let g:ycm_path_to_python_interpreter = '/usr/local/bin/python3'
 nmap <F9> :YcmCompleter GoToDeclaration<CR>
 nmap <F10> :YcmCompleter GoToDefinition<CR>
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
@@ -456,4 +457,3 @@ map <F5> <C-w><C-w>
 
 "for vim-autopep8
 let g:autopep8_disable_show_diff=1
-
