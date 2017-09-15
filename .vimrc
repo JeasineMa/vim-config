@@ -38,6 +38,7 @@ Plug 'tell-k/vim-autopep8'
 Plug 'dracula/vim'
 Plug 'fatih/vim-go'
 Plug 'tpope/vim-sensible' "some good features 
+Plug 'mhinz/vim-signify' "show diff when edit with vcs
 " " All of your Plugins must be added before the following line 
 call plug#end()
 
