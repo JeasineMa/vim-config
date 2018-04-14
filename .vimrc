@@ -29,9 +29,18 @@ Plug 'taketwo/vim-ros'
 Plug 'rdnetto/YCM-Generator',{'branch': 'stable'}
 Plug 'nvie/vim-flake8' "PEP8 static syntax& style check for vim
 Plug 'kchmck/vim-coffee-script'  "syntax highlight and indent for coffee-script
-Plug 'artur-shaik/vim-javacomplete2'  "autocomplete for java
+"Plug 'artur-shaik/vim-javacomplete2'  "autocomplete for java
+Plug 'nvie/vim-flake8' "PEP8 static syntax& style check for vim
+"Plug 'luochen1990/rainbow' "improved rainbow parentheses
+Plug 'leafgarland/typescript-vim' "syntax highlight for typescript
+Plug 'rust-lang/rust.vim' "useful tools for rust-lang
+Plug 'tell-k/vim-autopep8'
 Plug 'dracula/vim'
-" " All of your Plugins must be added before the following line
+Plug 'fatih/vim-go'
+Plug 'tpope/vim-sensible' "some good features 
+Plug 'mhinz/vim-signify' "show diff when edit with vcs
+Plug 'chrisbra/csv.vim' "for show csv in table format
+" " All of your Plugins must be added before the following line 
 call plug#end()
 
 """"""""""""""""""""""""""""
@@ -55,8 +64,6 @@ set nu
 "Color theme
 "For solarized plugin (color scheme)
 set background=dark   "必须保证此顺序
-"colorscheme desert
-"colorscheme solarized
 color dracula
 
 "Use mouse
@@ -160,10 +167,32 @@ nmap <C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 
 "for cursorline
-"set cursorline
+set cursorline
 
 "set paste with key-bindings to avoid indent chaos when pasting codes.
-set pastetoggle=<F2>
+" set pastetoggle=<F2>
+" set automatically set paste mode
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 "set <F1> as search highlight"
 let hlstate=0
@@ -227,54 +256,35 @@ inoremap ` <c-r>=SamePair('`')<CR>
 "Auto file headers
 "just vim build-in command, like global(g), replace(s), etc"
 "for C/CXX files
-autocmd bufnewfile *.{c,cpp,cc} so ~/.vim/headers/c_cpp_headers.tmpl
-autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
-autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
-autocmd bufnewfile *.{c,cpp,cc} exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
-autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp} execute "normal ma"
-autocmd Bufwritepre,filewritepre *.{c,cpp,h,hpp} exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
-autocmd bufwritepost,filewritepost *.{c,cpp,h,hpp} execute "normal `a"
+autocmd bufnewfile *.{c,cpp,cc,h,hpp} so ~/.vim/headers/c_cpp_headers.tmpl
+autocmd bufnewfile *.{c,cpp,cc,h,hpp} exe "1," . 5 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.{c,cpp,cc,h,hpp} exe "1," . 5 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.{c,cpp,cc,h,hpp} exe "1," . 5 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 " for verilog file
 autocmd bufnewfile *.v so ~/.vim/headers/verilog.tmpl
-autocmd bufnewfile *.v exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
-autocmd bufnewfile *.v exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
-autocmd bufnewfile *.v exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
-autocmd Bufwritepre,filewritepre *.v execute "normal ma"
-autocmd Bufwritepre,filewritepre *.v exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
-autocmd bufwritepost,filewritepost *.v execute "normal `a"
-
+autocmd bufnewfile *.v exe "1," . 5 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.v exe "1," . 5 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.v exe "1," . 5 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 "for Python files
 autocmd bufnewfile *.py so ~/.vim/headers/py_headers.tmpl
-autocmd bufnewfile *.py exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
-autocmd bufnewfile *.py exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
-autocmd bufnewfile *.py exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
-autocmd Bufwritepre,filewritepre *.py execute "normal ma"
-autocmd Bufwritepre,filewritepre *.py exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
-autocmd bufwritepost,filewritepost *.py execute "normal `a"
+autocmd bufnewfile *.py exe "1," . 5 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.py exe "1," . 5 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.py exe "1," . 5 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 "for Ruby files
 autocmd bufnewfile *.rb so ~/.vim/headers/rb_headers.tmpl
-autocmd bufnewfile *.rb exe "1," . 9 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
-autocmd bufnewfile *.rb exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
-autocmd bufnewfile *.rb exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
-autocmd Bufwritepre,filewritepre *.rb execute "normal ma"
-autocmd Bufwritepre,filewritepre *.rb exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
-autocmd bufwritepost,filewritepost *.rb execute "normal `a"
+autocmd bufnewfile *.rb exe "1," . 5 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.rb exe "1," . 5 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.rb exe "1," . 5 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 "for Shell scripts
 autocmd bufnewfile *.sh so ~/.vim/headers/sh_headers.tmpl
-autocmd bufnewfile *.sh exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
-autocmd bufnewfile *.sh exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
-autocmd bufnewfile *.sh exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
-autocmd Bufwritepre,filewritepre *.sh execute "normal ma"
-autocmd Bufwritepre,filewritepre *.sh exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
-autocmd bufwritepost,filewritepost *.sh execute "normal `a"
+autocmd bufnewfile *.sh exe "1," . 5 . "g/Author:.*/s//Author: " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.sh exe "1," . 5 . "g/FileName:.*/s//FileName: " .expand("%")
+autocmd bufnewfile *.sh exe "1," . 5 . "g/Date:.*/s//Date: " .strftime("%d-%m-%Y")
 "for java files
 autocmd bufnewfile *.java so ~/.vim/headers/java_headers.tmpl
-autocmd bufnewfile *.java exe "1," . 7 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
-autocmd bufnewfile *.java exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
-autocmd bufnewfile *.java exe "1," . 7 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
-autocmd Bufwritepre,filewritepre *.sh execute "normal ma"
-autocmd Bufwritepre,filewritepre *.sh exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
-autocmd bufwritepost,filewritepost *.sh execute "normal `a"
+autocmd bufnewfile *.java exe "1," . 5 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.java exe "1," . 5 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.java exe "1," . 5 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 "for makefile
 autocmd bufnewfile makefile 0r ~/.vim/headers/makefile_headers.tmpl
 "for ros_msg
@@ -288,12 +298,13 @@ autocmd bufnewfile CMakeLists.txt 0r ~/.vim/headers/cmakelist.tmpl
 "for generate guard for header file
 function! s:insert_gates()
     let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
-    execute "normal! i#ifndef " . gatename
+    execute "normal! Gi#ifndef " . gatename
     execute "normal! o#define " . gatename . " "
     execute "normal! Go#endif /* " . gatename . " */"
     normal! kk
 endfunction
 autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
+
 "for convert tab to 4 spaces and remove unwanted spaces
 function ShowSpacesTab(...)
   let @/='\v(\s+$)|( +\ze\t)|	'
@@ -330,6 +341,22 @@ command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
 nnoremap <F12>     :ShowSpacesTab 1<CR>
 nnoremap <S-F12>   m`:TrimSpaces<CR>``
 vnoremap <S-F12>   :TrimSpaces<CR>
+
+"for alternate tab switch 
+nnoremap <C-h> :tabprevious<CR>
+nnoremap <C-l>   :tabnext<CR>
+nnoremap <C-n>     :tabnew<CR>
+inoremap <C-h> <Esc>:tabprevious<CR>i
+inoremap <C-l>   <Esc>:tabnext<CR>i
+inoremap <C-n>     <Esc>:tabnew<CR>
+"make use of vim's hjkl
+map <C-j> <C-f>
+map <C-k> <C-b>
+
+"fix the cursor issue for neovim https://github.com/neovim/neovim/issues/6005
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+set guicursor=
+
 
 "End User's Configurations"
 """""""""""""""""""""""""""""""""""""""
@@ -370,6 +397,7 @@ let g:airline#extensions#tagbar#enabled = 1
 ""let g:airline_left_sep=''
 ""let g:airline_right_sep=''
 let g:airline#extensions#whitespace#enabled = 0
+nmap <F2> :AirlineToggle<CR>
 
 " for ycm
 let g:ycm_error_symbol = '>>'
@@ -382,7 +410,6 @@ nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>dc :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_global_ycm_extra_conf = "~/.ycm_extra_conf.py"
-
 "for tagbar
 nmap <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
