@@ -280,9 +280,9 @@ autocmd bufnewfile *.rb exe "1," . 5 . "g/File Name :.*/s//File Name : " .expand
 autocmd bufnewfile *.rb exe "1," . 5 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 "for Shell scripts
 autocmd bufnewfile *.sh so ~/.vim/headers/sh_headers.tmpl
-autocmd bufnewfile *.sh exe "1," . 5 . "g/Author:.*/s//Author: " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
-autocmd bufnewfile *.sh exe "1," . 5 . "g/FileName:.*/s//FileName: " .expand("%")
-autocmd bufnewfile *.sh exe "1," . 5 . "g/Date:.*/s//Date: " .strftime("%d-%m-%Y")
+autocmd bufnewfile *.sh exe "1," . 4 . "g/Author:.*/s//Author: " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
+autocmd bufnewfile *.sh exe "1," . 4 . "g/FileName:.*/s//FileName: " .expand("%")
+autocmd bufnewfile *.sh exe "1," . 4 . "g/Date:.*/s//Date: " .strftime("%d-%m-%Y")
 "for java files
 autocmd bufnewfile *.java so ~/.vim/headers/java_headers.tmpl
 autocmd bufnewfile *.java exe "1," . 5 . "g/Created By :.*/s//Created By : " .expand("Jeasine Ma [jeasinema[at]gmail[dot]com]")
@@ -405,8 +405,8 @@ nmap <F2> :AirlineToggle<CR>
 " for ycm
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
-let g:ycm_python_binary_path = '/usr/local/bin/python3'
-let g:ycm_path_to_python_interpreter = '/usr/local/bin/python3'
+let g:ycm_python_binary_path = '/usr/bin/python2'
+let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
 nmap <F9> :YcmCompleter GoToDeclaration<CR>
 nmap <F10> :YcmCompleter GoToDefinition<CR>
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
