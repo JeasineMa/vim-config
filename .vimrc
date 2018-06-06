@@ -40,6 +40,7 @@ Plug 'fatih/vim-go'
 Plug 'tpope/vim-sensible' "some good features 
 Plug 'mhinz/vim-signify' "show diff when edit with vcs
 Plug 'chrisbra/csv.vim' "for show csv in table format
+Plug 'pseewald/vim-anyfold' "language agnostic code folding 
 " " All of your Plugins must be added before the following line 
 call plug#end()
 
@@ -95,7 +96,7 @@ set shell=fish
 "amounts of histroy recorded
 set history=400
 
-"设置ambiwidth
+"set ambiwidth
 set ambiwidth=single
 
 "file types
@@ -366,12 +367,12 @@ set guicursor=
 
 "Start Plugin Configurations"
 "taglist:
-let Tlist_Show_One_File=0   "显示多个文件的tags
-"let Tlist_File_Fold_Auto_Close=1 "非当前文件，函数列表折叠隐藏
-let Tlist_Exit_OnlyWindow=1 "在taglist是最后一个窗口时退出vim
-let Tlist_Use_SingleClick=1 "单击时跳转
-let Tlist_GainFocus_On_ToggleOpen=1 "打开taglist时获得输入焦点
-"let Tlist_Process_File_Always=1 "不管taglist窗口是否打开，始终解析文件中的tag
+let Tlist_Show_One_File=0   "show tags for multiple files 
+"let Tlist_File_Fold_Auto_Close=1 
+let Tlist_Exit_OnlyWindow=1 "exit vim when there is only taglist window 
+let Tlist_Use_SingleClick=1 "jump when click 
+let Tlist_GainFocus_On_ToggleOpen=1 "focus on taglist when toggle out 
+"let Tlist_Process_File_Always=1 "parse tags at any times 
 
 "NerdTree
 map <F3> :NERDTreeMirror<CR>
@@ -380,7 +381,7 @@ set modifiable
 let g:NERDTree_autofocus = 1
 
 "airline
-set laststatus=2   "总是显示状态栏
+set laststatus=2   "always show statusline 
 let g:airline_inactive_collapse=1
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
@@ -461,3 +462,8 @@ let g:autopep8_disable_show_diff=1
 let g:ctrlp_open_new_file = 't'
 let g:ctrlp_max_files = 500
 let g:ctrlp_max_depth = 5
+
+"for vim-anyfold 
+let anyfold_activate=1
+let anyfold_fold_comments=1
+set foldlevel=0
