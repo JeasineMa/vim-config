@@ -91,7 +91,7 @@ endif
 filetype on
 
 "Set default shell
-set shell=fish
+set shell=zsh
 
 "amounts of histroy recorded
 set history=400
@@ -201,7 +201,7 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 "set <F1> as search highlight"
 let hlstate=0
-nnoremap <silent><F1> :if (hlstate == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=1-hlstate<cr>
+nnoremap <silent><F2> :if (hlstate == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=1-hlstate<cr>
 
 " auto load cscope.out
 autocmd VimEnter * cs add cscope.out
@@ -342,9 +342,9 @@ endfunction
 command -bar -nargs=? ShowSpacesTab call ShowSpacesTab(<args>)
 command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
 command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
-nnoremap <F12>     :ShowSpacesTab 1<CR>
-nnoremap <S-F12>   m`:TrimSpaces<CR>``
-vnoremap <S-F12>   :TrimSpaces<CR>
+"nnoremap <F11>   :ShowSpacesTab 1<CR>
+nnoremap <F12>   :TrimSpaces<CR>
+vnoremap <F12>   :TrimSpaces<CR>
 
 "for alternate tab switch 
 nnoremap <C-h> :tabprevious<CR>
@@ -401,13 +401,13 @@ let g:airline#extensions#tagbar#enabled = 1
 "let g:airline_left_sep=''
 "let g:airline_right_sep=''
 let g:airline#extensions#whitespace#enabled = 0
-nmap <F2> :AirlineToggle<CR>
+"nmap <F2> :AirlineToggle<CR>
 
 " for ycm
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
-let g:ycm_python_binary_path = '/usr/bin/python2'
-let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
+let g:ycm_python_binary_path = '/home/robot/anaconda3/bin/python'
+let g:ycm_path_to_python_interpreter = '/home/robot/anaconda3/bin/python'
 nmap <F9> :YcmCompleter GoToDeclaration<CR>
 nmap <F10> :YcmCompleter GoToDefinition<CR>
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
