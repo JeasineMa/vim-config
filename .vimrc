@@ -347,7 +347,7 @@ command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
 nnoremap <F12>   :TrimSpaces<CR>
 vnoremap <F12>   :TrimSpaces<CR>
 "trim leading spaced automatically
-autocmd bufwritepre * exe "TrimSpaces"
+"autocmd bufwritepre * exe "TrimSpaces"
 
 "for alternate tab switch
 nnoremap <C-h> :tabprevious<CR>
@@ -409,8 +409,8 @@ let g:airline#extensions#whitespace#enabled = 0
 " for ycm
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
-let g:ycm_python_binary_path = '/home/robot/anaconda3/bin/python'
-let g:ycm_path_to_python_interpreter = '/home/robot/anaconda3/bin/python'
+let g:ycm_python_binary_path = '/home1/mxj/anaconda3/bin/python'
+let g:ycm_path_to_python_interpreter = '/home1/mxj/anaconda3/bin/python'
 nmap <F9> :YcmCompleter GoToDeclaration<CR>
 nmap <F10> :YcmCompleter GoToDefinition<CR>
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
@@ -468,6 +468,6 @@ let g:ctrlp_max_files = 500
 let g:ctrlp_max_depth = 5
 
 "for vim-anyfold
-let anyfold_activate=1
+autocmd Filetype * AnyFoldActivate
 let anyfold_fold_comments=1
 set foldlevel=0
