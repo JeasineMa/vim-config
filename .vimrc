@@ -406,8 +406,8 @@ nmap <F2> :AirlineToggle<CR>
 " for ycm
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
-let g:ycm_python_binary_path = '/usr/bin/python2'
-let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
+let g:ycm_python_binary_path = '/usr/local/bin/python3'
+let g:ycm_path_to_python_interpreter = '/usr/local/bin/python3'
 nmap <F9> :YcmCompleter GoToDeclaration<CR>
 nmap <F10> :YcmCompleter GoToDefinition<CR>
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
@@ -464,6 +464,6 @@ let g:ctrlp_max_files = 500
 let g:ctrlp_max_depth = 5
 
 "for vim-anyfold 
-let anyfold_activate=1
+autocmd Filetype * AnyFoldActivate
 let anyfold_fold_comments=1
 set foldlevel=0
