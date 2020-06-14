@@ -35,7 +35,7 @@ Plug 'luochen1990/rainbow' "improved rainbow parentheses
 Plug 'leafgarland/typescript-vim' "syntax highlight for typescript
 Plug 'rust-lang/rust.vim' "useful tools for rust-lang
 Plug 'tell-k/vim-autopep8'
-Plug 'dracula/vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'fatih/vim-go'
 Plug 'tpope/vim-sensible' "some good features
 Plug 'mhinz/vim-signify' "show diff when edit with vcs
@@ -66,7 +66,11 @@ set nu
 "Color theme
 "For solarized plugin (color scheme)
 set background=dark   "必须保证此顺序
-color dracula
+if has('gui_running')
+  color tomorrow-night-eighties
+else
+  color dracula
+endif
 
 "Use mouse
 set mouse=a
