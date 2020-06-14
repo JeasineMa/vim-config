@@ -10,6 +10,7 @@ call plug#begin('~/.vim/bundle')
 "Plugin list
 
 Plug 'Valloric/YouCompleteMe'
+Plug 'arcticicestudio/nord-vim'
 "Plug 'bling/vim-airline'
 "Plug 'plasticboy/vim-markdown'
 "Plug 'lervag/vim-latex'
@@ -68,8 +69,10 @@ set nu
 set background=dark   "必须保证此顺序
 if has('gui_running')
   color tomorrow-night-eighties
+  " colorscheme nord
 else
   color dracula
+  " colorscheme nord
 endif
 
 "Use mouse
